@@ -5,6 +5,8 @@ Publish Markdown to various blogging platforms.
 
 This is the backend service used primarily by [Obsidian Publisher](https://github.com/metruzanca/obsidian-publisher).
 
+<!-- If I can't get the "publisher" plugin name, go with "markdown-publisher" to match the service -->
+
 While designed for use with Obsidian, this service has been made decoupled from obsidian and instead has its own API, allowing it to be used by other applications in the future.
 
 (That being said, this is just the plan. This service is still under development and so is the obsidian plugin)
