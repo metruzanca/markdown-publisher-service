@@ -32,7 +32,6 @@ export default class DevTo implements Platform {
     }
     try {
       const res = await this.axios.post<DevtoApi.Create.Response>(`/articles`, body);
-      console.log('devto api response', res.data);
   
       return {
         status: PlatformResponseStatus.Success,
@@ -44,7 +43,7 @@ export default class DevTo implements Platform {
       }
       
     } catch (error) {
-      console.log((error as AxiosError).response?.data);
+      console.error((error as AxiosError).response?.data);
       return {
         status: PlatformResponseStatus.Failure,
       }

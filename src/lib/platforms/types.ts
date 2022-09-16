@@ -16,7 +16,7 @@ export interface PlatformConstructor {
 }
 
 export interface Platform {
-  publish(article: Article): Promise<PlatformResponse<{}, {}>>
+  publish(article: Article & { id: string }): Promise<PlatformResponse<{}, {}>>
   update(article: Partial<Article>): Promise<PlatformResponse<{}, {}>>
   unPublish(): Promise<PlatformResponse<{}, {}>>
 }
@@ -51,6 +51,7 @@ export type PlatformUnion = (
 export type Body = {
   platform: PlatformUnion[]
   article: Article
+  id: string
 }
 
 type PublishedUrl = {
@@ -59,7 +60,6 @@ type PublishedUrl = {
 }
 
 export type Response = {
-  id: string
   // string is PlatformName
   platforms: {
     // Add data to specific platform like this

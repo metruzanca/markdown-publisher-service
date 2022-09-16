@@ -3,14 +3,14 @@ import { StatusCodes } from 'http-status-codes'
 import { getBody } from "$lib/handlers";
 import type { Body, PlatformName, Response } from "$lib/platforms/types";
 import platformSwitch from "$lib/platforms";
-import { v4 } from 'uuid'
 
 export const POST: RequestHandler = async ({ request }) => {
   const body = await getBody<Body>(request);
+  console.log('body ', body);
+  
 
   const response: Response = {
-    id: v4(),
-    platforms: {}
+    platforms: {},
   }
 
   if (body) {
@@ -18,8 +18,10 @@ export const POST: RequestHandler = async ({ request }) => {
       const name = platform.name as PlatformName;
       const PlatformClass = platformSwitch(name);
       if (PlatformClass) {
+        console.log(PlatformClass.name);
+        
         const blog = new PlatformClass(platform.apiKey);
-        response.platforms[name] = await blog.publish(body.article)
+        response.platforms[name] = await blog.publish({ ...body.article, id: body.id })
       }
     }
 
