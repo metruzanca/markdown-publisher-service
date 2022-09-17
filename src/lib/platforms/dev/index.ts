@@ -3,7 +3,6 @@ import axios from 'axios';
 import type { DevtoApi } from './types';
 import type { Article, Platform, PlatformResponse } from '../types';
 import { PlatformResponseStatus } from '../types';
-import { dev } from '$app/environment';
 
 const DEVTO_URL = 'https://dev.to/api'
 
