@@ -21,7 +21,7 @@ export default class DevTo implements Platform {
       baseURL: DEVTO_URL,
     })
   }
-  async publish(article: Article): Promise<PlatformResponse> {
+  async publish(article: Article): Promise<PlatformResponse<{ id: number }>> {
     const body: DevtoApi.Create.Body = {
       article: {
         published: false,
@@ -33,8 +33,9 @@ export default class DevTo implements Platform {
       const res = await this.axios.post<DevtoApi.Create.Response>(`/articles`, body);
   
       return {
-        status: PlatformResponseStatus.Success,
+        status: PlatformResponseStatus.Success, //TODO get rid of this from here
         publishedAt: res.data.created_at,
+        id: res.data.id,
         url: {
           path: res.data.path,
           slug: res.data.slug,
